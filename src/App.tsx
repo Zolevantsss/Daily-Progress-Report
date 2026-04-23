@@ -1,6 +1,6 @@
 import { useState, useEffect, useRef } from 'react';
 import { format } from 'date-fns';
-import { BookOpen, Calendar, Edit3, Save, User, Clock, CheckCircle2, ChevronRight, Hash, Image as ImageIcon, XCircle, Trash2, Maximize2, X, Plus, RefreshCw, Wifi, WifiOff } from 'lucide-react';
+import { BookOpen, Edit3, Save, User, Clock, ChevronRight, Image as ImageIcon, Trash2, X, Plus, RefreshCw, Wifi, WifiOff } from 'lucide-react';
 import type { Report, StudentProfile } from './types';
 import Gun from 'gun';
 
@@ -82,7 +82,9 @@ function App() {
       }
     });
 
-    return () => reportsRef.off();
+    return () => {
+       reportsRef.off();
+    };
   }, []);
 
   // Update editor based on selected date and name
@@ -273,7 +275,6 @@ function App() {
                         }`} 
                         onClick={() => {
                           setSelectedDate(report.date);
-                          // For viewing others, we update the local content but don't change the name
                           if (report.studentName !== profile.name) {
                             setCurrentContent(report.content);
                             setCurrentImages(report.images || []);
